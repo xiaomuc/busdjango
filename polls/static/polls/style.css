@@ -1,0 +1,9 @@
+li a {
+    color: green;
+}
+
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+    background: white url("images/s_f_bg_pat10.png") no-repeat right bottom;
+}

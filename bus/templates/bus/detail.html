@@ -1,0 +1,58 @@
+{% extends "bus/base.html" %} {% block title %}
+<title>{{text_dep}}/{{text_arr}}</title>
+{% endblock title %} {% block contents %}
+<div class="panel panel-primary">
+    <div class="panel-heading" id="title">{{ text_dep }}<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>{{ text_arr }}</span>
+    </div>
+
+    <table id="timetable" class="table table-striped ui-responsive table-stroke" data-role="table" data-mode="columntoggle">
+        <thead id="tableHeader">
+            <tr>
+                <th>系統</th>
+                <th>予測</th>
+                <th>定刻</th>
+                <th>状況</th>
+                <th data-priority="2">乗り場</th>
+                <th data-priority="3">行き先</th>
+                <th data-priority="4">車両</th>
+                <th data-priority="2">到着</th>
+                <th data-priority="3">運行</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            {% for row in buslist %}
+            <tr>
+                <td>
+                    {% if row.operator == "臨港" %}
+                    <span class="label label-danger">{{row.route}}</span> {% else %}
+                    <span class="label label-info">{{row.route}}</span> {% endif %}
+                </td>
+                <td><strong>{{row.prediction}}</strong></td>
+                <td>{{row.timetable}}</td>
+                <td>{{row.situation}}</td>
+                <td>{{row.gate}}</td>
+                <td>{{row.destination}}</td>
+                <td>{{row.vihicle}}</td>
+                <td>{{row.arrival}}</td>
+                <td>
+                    {% if row.operator == "臨港" %}
+                    <span class="label label-danger">{{row.operator}}</span> {% else %}
+                    <span class="label label-info">{{row.operator}}</span> {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel panel-footer">
+        <a href="../">
+            <span class="label label-primary">戻る</span>
+        </a>
+        <a href={{url_city}} target="*">
+            <span class="label label-info">川崎市バスナビ</span>
+        </a>
+        <a href={{url_rinko}} target="*">
+            <span class="label label-danger">臨港バスナビ</span>
+        </a>
+    </div>
+</div>
+{% endblock contents %}

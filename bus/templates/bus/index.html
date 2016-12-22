@@ -1,0 +1,17 @@
+{% extends "bus/base.html" %} {% block title %}
+<title>bus stop by Django</title>
+{% endblock title %} {% block contents %}
+<div class="panel panel-primary">
+    <div class="panel-heading">バス到着予測</div>
+    {% if line_list %} {% for line in line_list %}
+    <div class="panel-body">
+        <a href="{% url 'bus:detail' line.id %}">
+            {{ line.text_dep }}
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            {{ line.text_arr }}</a></li>
+    </div>
+    {% endfor %} {% else %}
+    <p>No polls are available.</p>
+    {%endif%}
+</div>
+{% endblock contents %}
